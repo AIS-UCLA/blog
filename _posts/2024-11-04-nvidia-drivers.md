@@ -1,7 +1,7 @@
-# Setting up nvidia server drivers on Ubuntu 24.04
-
-Christopher Milan
-11/04/2024
+---
+title: "Setting up nvidia server drivers on Ubuntu 24.04"
+author: "Christopher Milan"
+---
 
 ## Normal installation:
 
