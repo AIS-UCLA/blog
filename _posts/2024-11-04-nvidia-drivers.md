@@ -37,3 +37,8 @@ Here are some existing patch versions (not necessarily up to date):
 Follow the README at these links for installation instructions. If you installed
 a DKMS driver, don't forget to remove that driver with `dkms remove`.
 
+### P2P Verification
+
+The installation and loading of the P2P driver can be checked using `p2pBandwidthLatencyTest`
+from [`NVIDIA/cuda-samples`](https://github.com/NVIDIA/cuda-samples).
+
