@@ -17,7 +17,7 @@ I spent some time writing a new tool, [cherf](//github.com/ais-ucla/cherf), to
 make connecting to the server easier. The readme over on github has more details
 on how it works, but the basic steps to use it are as follows:
 
-1. Build `cherf` from scratch, or download an pre-built binary (on the releases
+1. Build `cherf` from scratch, or download a pre-built binary (on the releases
    page.
 2. Add `cherf` binary to `PATH` (and set as executable if you downloaded it).
 3. Create an X509 certificate signing request:
@@ -25,7 +25,7 @@ on how it works, but the basic steps to use it are as follows:
 mkdir ~/.cherf
 openssl req -newkey rsa:2048 -keyout ~/.cherf/key -out csr
 ```
-4. Send `csr` to a system administrator (see AI Safety Discord), and you will'
+4. Send `csr` to a system administrator (see AI Safety Discord), and you will
    receive a certificate, which you should save as `~/.cherf/cert`.
 5. Download `sullivan`'s SHA1 signature, and save it as
    `~/.cherf/sullivan.sha1`. This is available
@@ -42,6 +42,6 @@ Host sullivan
 ## Not working?
 
 Experiencing issues? First visit [this website](//www.checkmynat.com), and
-your NAT type is not "Symmetric NAT". If it is not, please open an issue
-[here](//github.com/ais-ucla/cherf/issues).
+ensure your NAT type is not "Symmetric NAT". If it is not, please open an
+issue [here](//github.com/ais-ucla/cherf/issues).
 
