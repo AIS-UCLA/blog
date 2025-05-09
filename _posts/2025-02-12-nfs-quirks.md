@@ -19,4 +19,14 @@ export OPAMROOT=/scratch/$USER/.opam
 ```
    Alternatively, you can check out something like
    [`nfsopam.sh`](//github.com/UnixJunkie/nfsopam).
+* `ghc` via `ghcup`:
+  `ghcup` is the recommended tool to manage `ghc` versions. Upon install, it
+  reads the environment variable `GHCUP_INSTALL_BASE_PREFIX`, which allows you
+  to select an alternative base installation location, probably a good idea,
+  because Haskell compilation is already slow enough. Notably, this needs to be
+  set when running `ghcup` commands as well as during install, so it is best to
+  put this in your `.bashrc`/`.zshrc`/etc:
+```
+export GHCUP_INSTALL_BASE_PREFIX=/scratch/$USER
+```
 
