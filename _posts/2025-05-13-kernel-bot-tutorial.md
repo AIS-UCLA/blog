@@ -20,16 +20,16 @@ Note that the bot will accept `.cu` and supports `ptx` files as well. You will a
 The `local_size` refers to blockDim (threadblock dimensions) and `global_size` refers to gridDim (grid dimensions). Also, if you only want a 2D threadblock and gridDim you have to input a tuple i.e. `(16, 16, 1)` for `local_size` and `global_size`. (The 1 at the end is just used as a placeholder for the third dimension).
 \
 \
-Additionally, if you designed your dims to be like (M/64, N/64), then for the submission you would actually need to calculate your size. So given that the challenge has fixed dimensions M=N=2048, then you would need to input (32, 32, 1) for `global_size`.
+Additionally, if you designed your dims to be like (M/64, N/64), then for the submission you would actually need to calculate your size. So given that the challenge has fixed dimensions M=N=4096, then you would need to input (64, 64, 1) for `global_size`.
 \
 \
 There are also two other optional parameters you can add to your submission: `transpose_a` and `transpose_b`. These are booleans that indicate whether you want to transpose the input matrices A and B respectively. The default value for both is `false`, so if you want to transpose them, you need to set them to `true`.
 
 ### Reference Matmul Kernel
 ```
-#define m 1024
-#define n 1024
-#define d 1024
+#define m 4096
+#define n 4096
+#define d 4096
 
 
 extern "C" __global__ void matmul(float* A, float* B, float* C){
