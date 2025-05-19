@@ -27,9 +27,9 @@ There are also two other optional parameters you can add to your submission: `tr
 
 ### Reference Matmul Kernel
 ```
-#define m 2048
-#define n 2048
-#define d 2048
+#define m 1024
+#define n 1024
+#define d 1024
 
 
 extern "C" __global__ void matmul(float* A, float* B, float* C){
