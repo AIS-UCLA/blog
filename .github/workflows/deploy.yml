@@ -21,4 +21,4 @@ jobs:
       - uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
-      - run: rsync -avz -e "ssh -o StrictHostKeyChecking=no -l www" _site/ cherf.ais-ucla.org:/www/blog.ais-ucla.org
+      - run: rsync -avz -e "ssh -o StrictHostKeyChecking=no -l www" _site/ cherf.aisafetyatucla.org:/www/blog.ais-ucla.org
