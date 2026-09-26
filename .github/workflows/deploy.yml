@@ -4,6 +4,13 @@ on:
     branches: [master]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
 jobs:
   deploy:
     name: deploy to Hetzner
@@ -21,4 +28,14 @@ jobs:
       - uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.DEPLOY_SSH_KEY }}
-      - run: rsync -avz -e "ssh -o StrictHostKeyChecking=no -l www" _site/ cherf.aisafetyatucla.org:/www/blog.ais-ucla.org
+      # Pinned host keys for cherf.aisafetyatucla.org, so a DNS change can
+      # never send a deploy to another server. If the server is rebuilt,
+      # verify its new fingerprints out of band before updating these.
+      - run: |
+          mkdir -p ~/.ssh
+          cat >> ~/.ssh/known_hosts <<'EOF'
+          cherf.aisafetyatucla.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBGNZbKSHWt10TWkDLDT2hDUHZC9zjAYHdN2rcQDH+tB
+          cherf.aisafetyatucla.org ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBH5DQe5HsGJioGKFNcD3olLoa/u3uv4d1af5AtGIhTnrZ6tWoXmLL9puFgT3a90ik/nqpPlrGtjpC0Xlx/6++bE=
+          cherf.aisafetyatucla.org ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDwUy1FXpcAy+fm6VpHUWg2uDXAuXZ9r8T2DOXWn80+xVw9fWiylxZXb36PbvR7r2J2ULbafmyswRnjIPX0YYOJGlk9o9kc2mzskn4m7puzPSQl8rdk46cfczh3rIuAbamWiMi4qH2Ne8qi8Qgy2SshjxvIbQdylP4dCr11L4Pdm/aaz5NCGJgHlFLy0mhzsEn1cloKdW+YJUkwtH1SYsLz6QTuK6dq2ePqwoDdhASQPPVrqyGcXiRoUOwcXk48ypBgMBWTF6hqZpvIfHS7HcCcz8GYiWqhR3L1Mk4+D1zfvI3f9cMg7tI2WWEUHUpNuhr7FCiOTz/ZS+FyaojEAIGqpnexIvAqxgarvhFARy91rPIlwMkk1sdEDd1OfJHFbM+QX6JS6LOuWcanyetOOfDAOidDBQVj8/E7tLC1OuOPZiY/sdOVdQfvD44kkDpWuoqSTAMiDNFnH/dMy4HKfXINCgn6DBFLf21eaoW7W2wiHVzM/E6Z6mptMUwkk16gvp0=
+          EOF
+      - run: rsync -avz -e "ssh -o StrictHostKeyChecking=yes -l www" _site/ cherf.aisafetyatucla.org:/www/blog.ais-ucla.org
